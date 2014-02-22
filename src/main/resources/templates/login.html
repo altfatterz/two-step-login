@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout" lang="en">
+<body>
+
+<div layout:fragment="container" class="container">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form th:action="@{/login}" method="post" role="form">
+                Scan this demo QR code with <a href="https://support.google.com/accounts/answer/1066447?hl=en" target="_blank">Google Authenticator</a> app in order receive verification codes needed in the second step.
+                <div>
+                    <img src="http://chart.googleapis.com/chart?chs=200x200&amp;chld=M%7C0&amp;cht=qr&amp;chl=otpauth%3A%2F%2Ftotp%2Flisa@gmail.com%3Fsecret%3D6YFX5HZT76OHHNMS" />
+                </div>
+                <fieldset>
+                    <h2>Please Sign In</h2>(demo credentials: lisa@gmail.com/password)
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        <strong>Oh snap!</strong> Invalid username and password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        <strong>Well done!</strong> You have been logged out.
+                    </div>
+                    <div th:if="${globalMessage}" th:text="${globalMessage}" class="alert alert-success" >
+                        Some Success message
+                    </div>
+                    <hr class="colorgraph" />
+                    <div class="form-group">
+                        <input type="email" name="username" id="username" class="form-control input-lg" placeholder="Email" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" required="true" />
+                    </div>
+				    <hr class="colorgraph" />
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <!-- needed for  Cross Site Request Forgery -->
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
