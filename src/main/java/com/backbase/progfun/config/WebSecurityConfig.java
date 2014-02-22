@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/login")
                 .permitAll()
-                // always use the default success url ignoring the SavedRequestAwareAuthenticationSuccessHandler
+                // always use the default success url despite if a protected page had been previously visited
                 .defaultSuccessUrl("/code", true)
                 .and()
             .logout()
